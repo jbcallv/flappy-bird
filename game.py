@@ -1,6 +1,8 @@
+# randomness and pygame
 import pygame
 import random
 
+# bird, pipes, and text
 from bird import Bird
 from pipe import Pipe
 from text import Text
@@ -8,34 +10,26 @@ from text import Text
 # handles game logic
 class Game:
     def __init__(self, window):
-        #self.start_game()
 
-        #self.bird = Bird()
+        # get the window and an array of pipes on the screen
         self.window = window
         self.pipe_array = []
 
+        # score stuff
         self.incremented = False
-        #self.start_game()
-
-        #self.generate_pipes()
-
-        #self.timer = 0
-
-        # flag to check collisions
-        #self.collided = False
-
         self.score = 0
 
+        # text stuff
         self.text = Text(self.window)
         self.text.start_text()
         self.bird = Bird()
 
+        # you can only 'start' the game once: at the beginning
         self.can_start = True
 
     def start_game(self):
+        # start the game
         if (self.can_start):
-            #self.text = Text(self.window)
-            #self.text.start_text()
             self.text.reset_text()
             self.bird = Bird()
             self.generate_pipes()
@@ -45,9 +39,7 @@ class Game:
             return True
 
     def generate_pipes(self):
-        gap = random.randint(300, 600)
-        gap1 = random.randint(300, 600)
-
+        # generate the pipes with a delay of (param1) and (param for pipe 2)
         p1 = Pipe(300)
         p2 = Pipe(300 + 480)
 
@@ -78,30 +70,29 @@ class Game:
                 return True
 
             else:
-                #self.score += 1
-                #self.text.set_score(self.score)
                 # no collisions
                 self.collided = False
                 return False
 
     def track_score(self):
-        # has been
-        #seincremented = False
-
+        # increment score once when bird passes through pipe
         for pipe in self.pipe_array:
             if (self.incremented == False):
                 if (self.bird.pos[1] >= (pipe.rand) and (self.bird.pos[1] + self.bird.size) <= (pipe.rand + pipe.gapSize) and self.bird.pos[0] > pipe.posX and self.bird.pos[0] < (pipe.posX + pipe.width)):
                     self.score += 1
                     self.text.set_score(self.score)
                     self.incremented = True
+
             if (self.bird.pos[0] > (pipe.posX + pipe.width)):
                 self.incremented = False
 
 
     def quit(self):
+        # quit the game
         return False
 
     def restart(self):
+        # restart game by resetting all variables
         if (self.collided == True):
             self.score = 0
             self.text = Text(self.window)
@@ -111,7 +102,9 @@ class Game:
             self.generate_pipes()
 
     def update(self, dt, flapped):
+        # as long as there are no collisions
         if (self.check_collision() == False):
+            # handle the game logic updates
             self.track_score()
             self.timer += 1
 
@@ -127,8 +120,8 @@ class Game:
                     self.pipe_array.remove(pipe)
 
 
-
     def draw(self):
+        # draw everything
         self.bird.draw(self.window)
 
         for pipe in self.pipe_array:

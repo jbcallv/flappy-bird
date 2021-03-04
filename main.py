@@ -55,19 +55,16 @@ while (running):
                 if (game.can_start):
                     started = game.start_game()
 
+    # always draw and clear screen
     screen.fill((0, 0, 0))
-    #dt = clock.tick(60) * 0.001
-    #game.update(dt, flapped)
-    #flapped = False
+    game.draw()
 
     # only call if game has been started
-    game.draw()
     if (started):
-        #game.draw()
         dt = clock.tick(60) * 0.001
         game.update(dt, flapped)
         flapped = False
-        #game.draw()
 
 
+    # update screen
     pygame.display.update()
