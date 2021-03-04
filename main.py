@@ -51,7 +51,8 @@ while (running):
 
             # start game
             if (event.key == pygame.K_s):
-                started = game.start_game()
+                if (game.can_start):
+                    started = game.start_game()
 
     screen.fill((0, 0, 0))
     #dt = clock.tick(60) * 0.001
@@ -59,12 +60,13 @@ while (running):
     #flapped = False
 
     # only call if game has been started
+    game.draw()
     if (started):
         #game.draw()
         dt = clock.tick(60) * 0.001
         game.update(dt, flapped)
         flapped = False
-        game.draw()
+        #game.draw()
 
 
     pygame.display.update()

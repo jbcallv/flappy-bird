@@ -3,6 +3,7 @@ import random
 
 from bird import Bird
 from pipe import Pipe
+from text import Text
 
 # handles game logic
 class Game:
@@ -20,10 +21,18 @@ class Game:
 
         # flag to check collisions
         #self.collided = False
+
+        self.text = Text(self.window)
+        self.text.start_text()
+        self.bird = Bird()
+
         self.can_start = True
 
     def start_game(self):
         if (self.can_start):
+            #self.text = Text(self.window)
+            #self.text.start_text()
+            self.text.reset_text()
             self.bird = Bird()
             self.generate_pipes()
             self.timer = 0
@@ -48,6 +57,7 @@ class Game:
                 print("bottom collision")
                 # collide
                 self.collided = True
+                self.text.restart_text()
                 return True
 
             # check if top of bird has collided
@@ -55,6 +65,7 @@ class Game:
                 print("top collision")
                 # collide
                 self.collided = True
+                self.text.restart_text()
                 return True
 
             # check if right of bird has collided
@@ -62,6 +73,7 @@ class Game:
                 print("right collision")
                 # collide
                 self.collided = True
+                self.text.restart_text()
                 return True
 
             else:
@@ -74,6 +86,7 @@ class Game:
 
     def restart(self):
         if (self.collided == True):
+            self.text = Text(self.window)
             self.bird = Bird()
             self.pipe_array.clear()
             self.timer = 0
@@ -95,8 +108,12 @@ class Game:
                 else:
                     self.pipe_array.remove(pipe)
 
+
+
     def draw(self):
         self.bird.draw(self.window)
 
         for pipe in self.pipe_array:
             pipe.draw(self.window)
+            
+        self.text.draw()
