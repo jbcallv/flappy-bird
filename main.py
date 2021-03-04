@@ -43,7 +43,8 @@ while (running):
 
             # flap
             if (event.key == pygame.K_SPACE):
-                flapped = True
+                if (started):
+                    flapped = True
 
             # restart
             if (event.key == pygame.K_r):
