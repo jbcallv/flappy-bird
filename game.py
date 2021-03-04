@@ -7,19 +7,29 @@ from pipe import Pipe
 # handles game logic
 class Game:
     def __init__(self, window):
-        #self.pipe = Pipe(60, 1200, 700)
+        #self.start_game()
 
-        self.bird = Bird()
+        #self.bird = Bird()
         self.window = window
         self.pipe_array = []
+        #self.start_game()
 
-        #self.pipe_array.append(self.pipe)
-        self.generate_pipes()
+        #self.generate_pipes()
 
-        self.timer = 0
+        #self.timer = 0
 
         # flag to check collisions
-        self.collided = False
+        #self.collided = False
+        self.can_start = True
+
+    def start_game(self):
+        if (self.can_start):
+            self.bird = Bird()
+            self.generate_pipes()
+            self.timer = 0
+            self.collided = False
+            self.can_start = False
+            return True
 
     def generate_pipes(self):
         gap = random.randint(300, 600)
