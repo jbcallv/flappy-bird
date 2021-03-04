@@ -40,11 +40,13 @@ class Game:
 
     def generate_pipes(self):
         # generate the pipes with a delay of (param1) and (param for pipe 2)
-        p1 = Pipe(300)
-        p2 = Pipe(300 + 480)
+        p1 = Pipe(310)
+        p2 = Pipe(310 + 500)
+        p3 = Pipe(310 + 500 + 500)
 
         self.pipe_array.append(p1)
         self.pipe_array.append(p2)
+        self.pipe_array.append(p3)
 
     def check_collision(self):
         for pipe in self.pipe_array:

@@ -19,10 +19,10 @@ class Pipe:
         self.color = (0, 255, 0)
 
         # pipe movement speed
-        self.speed = 300
+        self.speed = 380
 
         # size of gaps between top and bottom pipes
-        self.gapSize = random.randint(185, 300)
+        self.gapSize = random.randint(175, 250)
 
         # the height of the top pipe
         self.rand = random.randint(100, 400)
