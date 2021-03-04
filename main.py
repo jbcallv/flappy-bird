@@ -31,14 +31,17 @@ flapped = False
 while (running):
     for event in pygame.event.get():
         if (event.type == pygame.QUIT):
-            running = False
+            running = game.quit()
 
         if (event.type == pygame.KEYDOWN):
             if (event.key == pygame.K_ESCAPE):
-                running = False
+                running = game.quit()
 
             if (event.key == pygame.K_SPACE):
                 flapped = True
+
+            if (event.key == pygame.K_r):
+                game.restart()
 
     screen.fill((0, 0, 0))
     dt = clock.tick(60) * 0.001

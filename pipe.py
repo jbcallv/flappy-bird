@@ -3,7 +3,6 @@ import random
 
 class Pipe:
     def __init__(self, gap):
-        #self.height = height
         self.width = 60
 
         self.windWidth = 1200
@@ -11,13 +10,13 @@ class Pipe:
 
         self.delay = 50
         self.gap = gap
-        self.posX = self.windWidth + self.gap#self.delay
+        self.posX = self.windWidth + self.gap
 
         self.color = (0, 255, 0)
 
         self.speed = 300
 
-        self.gapSize = 300
+        self.gapSize = random.randint(195, 300)#200
 
         self.rand = random.randint(100, 400)
 
@@ -25,6 +24,5 @@ class Pipe:
         self.posX -= self.speed * dt
 
     def draw(self, window):
-        #rand = random.randint(100, 400)
         pygame.draw.rect(window, self.color, pygame.Rect(self.posX, 0, self.width, self.rand))
         pygame.draw.rect(window, self.color, pygame.Rect(self.posX, self.rand + self.gapSize, self.width, self.windHeight))
